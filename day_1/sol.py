@@ -1,0 +1,50 @@
+# Part 1
+
+def solution():
+    pointing = 50
+    zeros = 0
+
+    f = open("advent_of_code_2025/day_1/input.txt", "r")
+    for line in f:
+        if line[0] == "L":
+            pointing -= int(line[1:])
+        elif line[0] == "R":
+            pointing += int(line[1:])
+
+        pointing %= 100
+
+        if (pointing == 0):
+            zeros += 1
+
+    return zeros
+
+print(solution())
+
+
+# Part 2
+
+def solution2():
+    pointing = 50
+    zeros = 0
+
+    f = open("advent_of_code_2025/day_1/input.txt", "r")
+    for line in f:
+        if line[0] == "L":
+            # Offset if already on 0 (we don't cross over it again)
+            if pointing == 0:
+                zeros -= 1
+
+            pointing -= int(line[1:])
+
+            zeros -= (pointing - 1) // 100
+
+        elif line[0] == "R":
+            pointing += int(line[1:])
+
+            zeros += pointing // 100
+
+        pointing %= 100
+
+    return zeros
+
+print(solution2())
